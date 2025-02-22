@@ -28,8 +28,8 @@ public class Gripper {
 //    private final double SCORE_OBJECT_LEFT_PICKUP = -1, SCORE_OBJECT_LEFT_RELEASE = 1;
     private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
 
-    private final double INTAKE_GRIPPER_GRAB = -1, INTAKE_GRIPPER_RELEASE = 1;
-    private final double OUTTAKE_GRIPPER_GRAB = 0, OUTTAKE_GRIPPER_RELEASE = 0.5;
+    private final double INTAKE_GRIPPER_GRAB =  0.10, INTAKE_GRIPPER_RELEASE =0.45;
+    private final double OUTTAKE_GRIPPER_GRAB = -0.2, OUTTAKE_GRIPPER_RELEASE = 0.5;
 
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
@@ -61,9 +61,7 @@ public class Gripper {
     public void intake_release_position() {
         intake_gripper.setPosition(INTAKE_GRIPPER_RELEASE);
     }
-    public void intake_release_position_initial() {
-        intake_gripper.setPosition(INTAKE_GRIPPER_RELEASE-0.5);
-    }
+
 
     public void outtake_grab_position() {
         outtake_gripper.setPosition(OUTTAKE_GRIPPER_GRAB);
@@ -91,7 +89,11 @@ public class Gripper {
 
     public void score_object_release_position() {
         // leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
-        rightRaiser.setPosition(0.85);
+        rightRaiser.setPosition(0.80);
+    }
+    public void basket() {
+        // leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
+        rightRaiser.setPosition(0.37);
     }
 
     public static class Parameters {

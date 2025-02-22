@@ -49,6 +49,7 @@ public class MainTeleOp extends OpMode {
     boolean gripper_rotating = false;
     boolean lb_down = false;
     boolean lift_position = false;
+    boolean score_position = false;
 
     boolean gripper_grab = true;
 
@@ -73,7 +74,7 @@ public class MainTeleOp extends OpMode {
         // ====================================================
         controller1 = new Controller(gamepad1);
         controller2 = new Controller(gamepad2);
-
+        robot.horizontalSlider.setStationaryPosition();
 
         drive = new PinpointDrive(hardwareMap, new Pose2d(0,0,0));
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -147,7 +148,9 @@ public class MainTeleOp extends OpMode {
         }
 
         if (controller1.leftBumperOnce()) {
-//            robot.gripper.outtake_release_position();
+            if(score_position){
+
+            }
             robot.extindere_slider_orizontal();
             gripper_grab = false;
             isExtended = true;
@@ -178,9 +181,12 @@ public class MainTeleOp extends OpMode {
 
         if (controller1.YOnce()) {
             robot.gripper.score_object_pickup_position();
+            score_position=true;
         }
         if (controller1.XOnce()) {
             robot.gripper.score_object_release_position();
+            score_position=false;
+
         }
         if (controller1.dpadUpOnce()) {
             robot.gripper.outtake_release_chamber();
