@@ -82,7 +82,7 @@ public class Robot {
         horizontalSlider.setStationaryPosition();
         sleep(1200);
         gripper.intake_release_position();
-        sleep(75);
+        sleep(100);
         gripper.outtake_grab_position();
 
     }

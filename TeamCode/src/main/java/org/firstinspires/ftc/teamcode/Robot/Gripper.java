@@ -22,14 +22,14 @@ public class Gripper {
     private final double OPEN_BARIER_POS = 0.00, CLOSE_BARIER_POS = 0.1;
     */
     private final double SCORE_CHAMBER = 0;
-    private final double PASS_OBJECT_LEFT_PICKUP = 0.95, PASS_OBJECT_LEFT_RELEASE = -1;
+   private final double PASS_OBJECT_LEFT_PICKUP = 0.6, PASS_OBJECT_LEFT_RELEASE = -1;
     private final double PASS_OBJECT_RIGHT_PICKUP = -1, PASS_OBJECT_RIGHT_RELEASE = 0.7;
 
-//    private final double SCORE_OBJECT_LEFT_PICKUP = -1, SCORE_OBJECT_LEFT_RELEASE = 1;
+   private final double SCORE_OBJECT_LEFT_PICKUP = 1, SCORE_OBJECT_LEFT_RELEASE = 0.05;
     private final double SCORE_OBJECT_RIGHT_PICKUP = 1, SCORE_OBJECT_RIGHT_RELEASE = -1;
 
-    private final double INTAKE_GRIPPER_GRAB =  0.10, INTAKE_GRIPPER_RELEASE =0.45;
-    private final double OUTTAKE_GRIPPER_GRAB = -0.2, OUTTAKE_GRIPPER_RELEASE = 0.5;
+    private final double INTAKE_GRIPPER_GRAB =  0.125, INTAKE_GRIPPER_RELEASE =0.45;
+    private final double OUTTAKE_GRIPPER_GRAB = -0.3, OUTTAKE_GRIPPER_RELEASE = 0.5;
 
     private final Telemetry telemetry;
     private final HardwareMap hardwareMap;
@@ -52,7 +52,8 @@ public class Gripper {
     }
 
     public void outtake_release_chamber() {
-        rightRaiser.setPosition(0.5);
+        leftRaiser.setPosition(0.55);//0.5
+//        rightRaiser.setPosition(0.7);
     }
     public void intake_grab_position() {
         intake_gripper.setPosition(INTAKE_GRIPPER_GRAB);
@@ -83,16 +84,17 @@ public class Gripper {
     }
 
     public void score_object_pickup_position() {
-       // leftRaiser.setPosition(SCORE_OBJECT_LEFT_PICKUP);
+        leftRaiser.setPosition(SCORE_OBJECT_LEFT_PICKUP);
         rightRaiser.setPosition(0);
+
     }
 
     public void score_object_release_position() {
-        // leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
-        rightRaiser.setPosition(0.80);
+        leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
+        rightRaiser.setPosition(0.8);//.80
     }
     public void basket() {
-        // leftRaiser.setPosition(SCORE_OBJECT_LEFT_RELEASE);
+        leftRaiser.setPosition(0.45);
         rightRaiser.setPosition(0.37);
     }
 
@@ -101,3 +103,4 @@ public class Gripper {
         public Telemetry telemetry;
     }
 }
+//mirsan bircea a fost aici !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

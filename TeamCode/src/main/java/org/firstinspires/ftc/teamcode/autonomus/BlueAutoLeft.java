@@ -34,11 +34,11 @@ public class BlueAutoLeft extends LinearOpMode {
 
         // First movement: trBasket
         TrajectoryActionBuilder trBasket = drive.actionBuilder(lastPose)
-                .splineToLinearHeading(new Pose2d(7.5, 43, Math.toRadians(-45.0)), Math.toRadians(-220.0));
-        lastPose = new Pose2d(7.5, 43, Math.toRadians(-45.0)); // Update last position
+                .splineToLinearHeading(new Pose2d(7, 42.5, Math.toRadians(-45.0)), Math.toRadians(-220.0));
+        lastPose = new Pose2d(7, 42.5, Math.toRadians(-45.0)); // Update last position
         TrajectoryActionBuilder trBack = drive.actionBuilder(lastPose)
-                .splineToLinearHeading(new Pose2d(6.5, 45, Math.toRadians(-45.0)), Math.toRadians(-220.0));
-        lastPose = new Pose2d(6.2, 45.3, Math.toRadians(-45.0)); // Update last position
+                .splineToLinearHeading(new Pose2d(5.9, 6, Math.toRadians(-45.0)), Math.toRadians(-220.0));
+        lastPose = new Pose2d(5.9, 6, Math.toRadians(-45.0)); // Update last position
         TrajectoryActionBuilder trFront = drive.actionBuilder(lastPose)
                 .splineToLinearHeading(new Pose2d(8, 44, Math.toRadians(-45.0)), Math.toRadians(-220.0));
         lastPose = new Pose2d(8, 44, Math.toRadians(-45.0)); // Update last position
@@ -57,7 +57,7 @@ public class BlueAutoLeft extends LinearOpMode {
         lastPose = new Pose2d(13.0, 34.0, 0.0); // Update last position
 
         TrajectoryActionBuilder trBasket1 = drive.actionBuilder(lastPose)
-                .splineToLinearHeading(new Pose2d(7.5, 43, Math.toRadians(-45.0)), Math.toRadians(-220.0));
+                .splineToLinearHeading(new Pose2d(8, 42.5, Math.toRadians(-45.0)), Math.toRadians(-220.0));
         lastPose = new Pose2d(7.5, 43, Math.toRadians(-45.0)); // Update last position
 
         // Final movement: Park
@@ -72,7 +72,7 @@ public class BlueAutoLeft extends LinearOpMode {
                                 trBasket.build(),
                                 raiseSlider(1300)
                         ),
-                        raiseSlider(2850),
+                        raiseSlider(3000),
                         Sleep(100),
                         dropSample(),
                         trBack.build(),
@@ -91,7 +91,7 @@ public class BlueAutoLeft extends LinearOpMode {
                                 trBasket1.build(),
                                 raiseSlider(1300)
                         ),
-                        raiseSlider(2850),
+                        raiseSlider(3000),
                         Sleep(100),
                         dropSample(),
                         trBack.build(),
@@ -100,7 +100,7 @@ public class BlueAutoLeft extends LinearOpMode {
                         trFront.build(),
                         resetOuttake(),
                         raiseSlider(0),
-                        trPark.build()
+                        Sleep(1000)
 
 
 //                        intakeSample(),
@@ -135,6 +135,7 @@ public class BlueAutoLeft extends LinearOpMode {
     public Action raiseSlider(int value) {
         return packet -> {
             robot.slider.raiseSlider(value, 1);
+            sleep(1000);
             return false;
         };
     }
@@ -150,7 +151,7 @@ public class BlueAutoLeft extends LinearOpMode {
             robot.gripper.intake_release_position();
 
 
-            sleep(1000);
+            sleep(500);
 
 
             robot.gripper.intake_grab_position();
@@ -172,7 +173,7 @@ public class BlueAutoLeft extends LinearOpMode {
     public Action resetOuttake() {
         return packet -> {
             robot.gripper.outtake_grab_position();
-            sleep(1000);
+            sleep(500);
             robot.gripper.score_object_release_position();
             sleep(500);
             return false;
@@ -183,9 +184,9 @@ public class BlueAutoLeft extends LinearOpMode {
     public Action dropSample() {
         return packet -> {
 
-            sleep(1000);
+            sleep(500);
             robot.gripper.basket();
-            sleep(1500);
+            sleep(500);
 
             return false;
         };
@@ -193,7 +194,7 @@ public class BlueAutoLeft extends LinearOpMode {
     public Action dropSample1() {
         return packet -> {
             robot.gripper.outtake_release_position();
-            sleep(1000);
+            sleep(300);
             return false;
         };
     }
