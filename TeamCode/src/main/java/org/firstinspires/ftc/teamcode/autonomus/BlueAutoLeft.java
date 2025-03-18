@@ -61,10 +61,15 @@ public class BlueAutoLeft extends LinearOpMode {
         lastPose = new Pose2d(7.5, 43, Math.toRadians(-45.0)); // Update last position
 
         // Final movement: Park
-        lastPose = new Pose2d(8, 44, Math.toRadians(-45.0)); // Update last position
-        TrajectoryActionBuilder trPark = drive.actionBuilder(lastPose)
-                .splineToLinearHeading(new Pose2d(43.0, 21.0, Math.toRadians(0.0)), Math.toRadians(0.0));
         lastPose = new Pose2d(20.0, 35.0, Math.toRadians(0.0)); // Final last position update
+        TrajectoryActionBuilder trPark = drive.actionBuilder(lastPose)
+                .splineToLinearHeading(new Pose2d(55.0, 25.0, Math.toRadians(90.0)), Math.toRadians(-30.0))
+                .splineToLinearHeading(new Pose2d(55.0,19.0,Math.toRadians(90.0)), Math.toRadians(-30.0));
+
+
+
+
+
 
         Actions.runBlocking(
                 new SequentialAction(
@@ -100,7 +105,11 @@ public class BlueAutoLeft extends LinearOpMode {
                         trFront.build(),
                         resetOuttake(),
                         raiseSlider(0),
-                        trPark.build()
+                        trPark.build(),
+                        Sleep(200),
+                        Park(),
+                        Sleep(300)
+
 
 
 //                        intakeSample(),
@@ -124,6 +133,8 @@ public class BlueAutoLeft extends LinearOpMode {
 
 
     }
+
+
 
     public Action Sleep(int value) {
         return packet -> {
@@ -150,7 +161,7 @@ public class BlueAutoLeft extends LinearOpMode {
             robot.gripper.intake_release_position();
 
 
-            sleep(1000);
+            sleep(600);
 
 
             robot.gripper.intake_grab_position();
@@ -161,9 +172,16 @@ public class BlueAutoLeft extends LinearOpMode {
             robot.horizontalSlider.setStationaryPosition();
             sleep(1200);
             robot.gripper.intake_release_position();
-            sleep(100);
+            sleep(130);
             robot.gripper.outtake_grab_position();
             sleep(250);
+            return false;
+
+        };
+    }
+    public Action Park() {
+        return packet -> {
+            robot.gripper.basket();
             return false;
 
         };
@@ -185,7 +203,7 @@ public class BlueAutoLeft extends LinearOpMode {
 
             sleep(1000);
             robot.gripper.basket();
-            sleep(1500);
+            sleep(300);
 
             return false;
         };
@@ -193,7 +211,7 @@ public class BlueAutoLeft extends LinearOpMode {
     public Action dropSample1() {
         return packet -> {
             robot.gripper.outtake_release_position();
-            sleep(1000);
+            sleep(300);
             return false;
         };
     }
