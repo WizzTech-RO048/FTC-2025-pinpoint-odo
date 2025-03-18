@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
+import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -89,5 +90,78 @@ public class Robot {
     public void getCurrentPos() {
         telemetry.addData("Slider position", slider.getCurrentPositionSliderLeft());
         telemetry.update();
+    }
+    public Action raiseSlider(int value) {
+        return packet -> {
+            slider.raiseSlider(value, 1);
+            sleep(1000);
+            return false;
+        };
+    }
+
+    public Action intakeSample() {
+        return packet -> {
+            gripper.outtake_release_position();
+            gripper.intake_grab_position();
+            sleep(250);
+            horizontalSlider.setExtendedPosition();
+            gripper.pass_object_pickup_position();
+            sleep(170);
+            gripper.intake_release_position();
+
+
+            sleep(1000);
+
+
+            gripper.intake_grab_position();
+            sleep(400);
+            gripper.pass_object_release_position();
+            gripper.intake_grab_position();
+            sleep(700);
+            horizontalSlider.setStationaryPosition();
+            sleep(1200);
+            gripper.intake_release_position();
+            sleep(100);
+            gripper.outtake_grab_position();
+            sleep(250);
+            return false;
+
+        };
+    }
+
+    public Action resetOuttake() {
+        return packet -> {
+            gripper.outtake_grab_position();
+            sleep(500);
+            gripper.score_object_release_position();
+            sleep(500);
+            return false;
+        };
+    }
+
+
+    public Action dropSample() {
+        return packet -> {
+
+            sleep(500);
+            gripper.basket();
+            sleep(500);
+
+            return false;
+        };
+    }
+    public Action dropSample1() {
+        return packet -> {
+            gripper.outtake_release_position();
+            sleep(300);
+            return false;
+        };
+    }
+    public Action initSliderIntake() {
+        return packet -> {
+            horizontalSlider.setStationaryPosition();
+            sleep(300);
+            return false;
+        };
     }
 }
